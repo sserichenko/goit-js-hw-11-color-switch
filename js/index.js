@@ -19,20 +19,19 @@ let max = colors.length -1;
 
 
 const changerColor = {
-  isActive: false,
   start(){
-    if(this.isActive){
-      return;
-    }
-    this.isActive = true;  
+    startButton.disabled = !this.isActive;
+    stopButton.disabled = this.isActive;
     customTimerId = setInterval(() => {
     body.style.backgroundColor = colors[randomIntegerFromInterval(min, max)];
   }, 1000);
   },
   stop(){
     clearInterval(customTimerId);
+    startButton.disabled = this.isActive;
+    stopButton.disabled = !this.isActive;
   }
 };
-
+stopButton.disabled = true;
 startButton.addEventListener('click', changerColor.start.bind(changerColor));
 stopButton.addEventListener('click', changerColor.stop.bind(changerColor));
